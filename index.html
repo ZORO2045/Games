@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game List</title>
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* Loading Screen Styling */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #ff4500;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(20, 20, 20, 0.95); /* Darker background */
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px #ff0000;
+            letter-spacing: 2px;
+        }
+
+        /* Game List and Items */
+        .game-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-item {
+            background-color: #1c1c1c;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            width: 250px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+        }
+
+        .game-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.7);
+        }
+
+        .game-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            background: linear-gradient(45deg, rgba(255, 0, 0, 0.7), rgba(255, 100, 0, 0.7));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .game-item:hover::after {
+            opacity: 1;
+        }
+
+        .game-item h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Button Styling */
+        button {
+            background: linear-gradient(45deg, #ff0000, #ff4500, #ff5733);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 0, 1), 0 0 35px rgba(255, 0, 0, 0.7), 0 0 45px rgba(255, 0, 0, 0.5);
+            transform: scale(1.1);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(20, 20, 20, 0.95); /* Darker background */
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        footer a {
+            color: #ff5733;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>CoderZone</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="game-list">
+            <div class="game-item">
+                <h2>Fish Game</h2>
+                <button onclick="goToGame('https://zoro2045.github.io/fish_game/')">Play Now</button>
+            </div>
+            <div class="game-item">
+                <h2>2048 Game</h2>
+                <button onclick="goToGame('https://zoro2045.github.io/2048_Game/')">Play Now</button>
+            </div>
+            <div class="game-item">
+                <h2>Numbers Game</h2>
+                <button onclick="goToGame('https://zoro2045.github.io/Numbers_Game/')">Play Now</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        Developed by ፚ Ꭷ Ꮢ Ꭷ ❥ - <a href="https://t.me/ZORO2045" target="_blank">Contact on Telegram</a>
+    </footer>
+
+    <script>
+        // Loading Screen Removal
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500); // Delay to allow fade-out animation
+        });
+
+        // Function to Navigate to Game
+        function goToGame(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
